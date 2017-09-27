@@ -1,0 +1,41 @@
+{
+  "name": "seymuromarov/sms",
+  "description": "Laravel api for sending sms for azerbaijan providers.",
+  "type": "laravel",
+  "keywords": [
+    "azerbaijan",
+    "sms",
+    "send",
+    "provider",
+    "baku",
+    "laravel",
+    "api"
+  ],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Seymur Omarov",
+      "email": "omarov.seymur@outlook.com"
+    }
+  ],
+  "minimum-stability": "stable",
+  "require": {
+    "php": ">=5.5.0",
+    "guzzlehttp/guzzle": "^6.3"
+  },
+  "autoload": {
+    "psr-4": {
+      "Seymuromarov\\Sms\\": "src/"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Seymuromarov\\Sms\\SmsProviderServiceProvider"
+      ],
+      "aliases": {
+        "Sms": "Seymuromarov\\Sms\\Facade\\Sms"
+      }
+    }
+  }
+}
