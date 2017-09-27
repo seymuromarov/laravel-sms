@@ -1,9 +1,6 @@
-<p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
-
 ## About Project
 
-Laravel api for sending messages and checking balance with ClockWorkSms 
-
+Laravel api for sending sms from different providers
 ## Requirements
 
 * [Composer](https://getcomposer.org/)

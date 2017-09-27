@@ -1,10 +1,12 @@
 {
   "name": "seymuromarov/sms",
-  "description": "Laravel api for sending sms for azerbaijan providers.",
+  "description": "Laravel api for sending sms from different providers.",
   "type": "laravel",
   "keywords": [
     "azerbaijan",
     "sms",
+    "clockwork",
+    "msm",
     "send",
     "provider",
     "baku",
