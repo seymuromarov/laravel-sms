@@ -1,6 +1,7 @@
 ## About Project
 
-Laravel api for sending sms from different providers
+Laravel api for sending sms from different providers  
+Currently Supported `Sms.ru` , `Clockwork`  , `MSM`, `Smsapi`
 ## Requirements
 
 * [Composer](https://getcomposer.org/)
@@ -43,11 +44,12 @@ SMS_PASS=
 SMS_FROM=
 SMS_PROVIDER=
 ```
-SMS_PROVIDER => provider name `msm` , `clockwork`  
-SMS_PASS - provider password(password on `msm` , key on `clockwork`,
-api_id on `sms.ru`)  
-SMS_FROM - only for msm   
-SMS_USER - only for msm username
+SMS_PROVIDER => provider name `msm` , `clockwork` , `smsRu` , `smsApi` ,`nexmo`
+SMS_PASS - provider password(key on `clockwork`, api_id on `smsRu`,MD5password on `smsApi`)  
+SMS_FROM - from optional for some providers
+SMS_USER - Username optional for some providers 
+ 
+Note for `Nexmo` :api_key is SMS_PASS, api_secret is SMS_USER
 
 For using Sms Sender use this:
 ```
@@ -57,7 +59,7 @@ For using Sms Sender use this:
 
 ```
   
-for checking balance use (only for Clockwork):  
+for checking balance use (only for Clockwork,SmsApi):  
 ```
     Sms::balance();
 ```

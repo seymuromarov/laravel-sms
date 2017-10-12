@@ -2,6 +2,8 @@
 
 namespace Seymuromarov\Sms;
 
+use Seymuromarov\Sms\Gateways\nexmoSms;
+use Seymuromarov\Sms\Gateways\smsApi;
 use Seymuromarov\Sms\Gateways\Msm;
 use Seymuromarov\Sms\Gateways\Clockwork;
 use Seymuromarov\Sms\Gateways\SmsRu;
@@ -17,7 +19,11 @@ class SmsGenerator
 
     public function send($mobile, $content)
     {
-        return $this->gateway->send_sms($mobile, $content);
+        if ($this->gateway) {
+            return $this->gateway->send_sms($mobile, $content);
+        } else {
+            return "ERROR WRONG PROVIDER CURRENTLY WE SUPPORT -> clockwork,msm,smsRu,smsApi,nexmo if u need other provider just ask it !";
+        }
     }
 
     public function balance()
@@ -41,6 +47,15 @@ class SmsGenerator
                 break;
             case 'smsRu':
                 $this->gateway = new SmsRu();
+                break;
+            case 'smsApi':
+                $this->gateway = new smsApi();
+                break;
+            case 'nexmo':
+                $this->gateway = new nexmoSms();
+                break;
+            default:
+                $this->gateway = false;
                 break;
         }
         return $this;

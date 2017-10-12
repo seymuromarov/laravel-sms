@@ -11,7 +11,11 @@
     "provider",
     "baku",
     "laravel",
-    "api"
+    "api",
+    "sms.ru",
+    "sms ru",
+    "sms Api",
+    "smsapi"
   ],
   "license": "MIT",
   "authors": [
