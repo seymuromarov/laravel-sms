@@ -8,5 +8,6 @@ return [
     'clockwork_url' => "https://api.clockworksms.com/http/send.aspx",
     'smsRu_url' => "https://sms.ru/sms/send",
     'smsApi_url' => "https://api.smsapi.com/sms.do?format=json",
-    'nexmo' => "https://rest.nexmo.com/sms/json",
+    'nexmo_url' => "https://rest.nexmo.com/sms/json",
+    'clickatell_url' => "https://platform.clickatell.com/messages/http/send",
 ];

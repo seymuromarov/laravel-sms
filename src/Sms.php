@@ -2,6 +2,7 @@
 
 namespace Seymuromarov\Sms;
 
+use Seymuromarov\Sms\Gateways\Clickatell;
 use Seymuromarov\Sms\Gateways\nexmoSms;
 use Seymuromarov\Sms\Gateways\smsApi;
 use Seymuromarov\Sms\Gateways\Msm;
@@ -22,7 +23,7 @@ class SmsGenerator
         if ($this->gateway) {
             return $this->gateway->send_sms($mobile, $content);
         } else {
-            return "ERROR WRONG PROVIDER CURRENTLY WE SUPPORT -> clockwork,msm,smsRu,smsApi,nexmo if u need other provider just ask it !";
+            return "ERROR WRONG PROVIDER CURRENTLY WE SUPPORT -> clockwork,msm,smsRu,smsApi,nexmo,clickatell if u need other provider just ask it !";
         }
     }
 
@@ -53,6 +54,9 @@ class SmsGenerator
                 break;
             case 'nexmo':
                 $this->gateway = new nexmoSms();
+                break;
+            case 'clickatell':
+                $this->gateway = new Clickatell();
                 break;
             default:
                 $this->gateway = false;

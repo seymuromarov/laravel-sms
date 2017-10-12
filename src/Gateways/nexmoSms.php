@@ -21,13 +21,13 @@ class nexmoSms
         $mobile = explode(",", $mobile);
 
         $client = new \GuzzleHttp\Client();
-        $promise = $client->requestAsync('POST', config('sms-package.nexmo'), [
+        $promise = $client->requestAsync('POST', config('sms-package.nexmo_url'), [
             'form_params' => [
                 'from' => config('sms-package.from'),
                 'text' => $content,
                 'to' => $mobile,
-                'api_key' => config('sms-package.pass'),
-                'api_secret' => config('sms-package.user'),
+                'api_key' => config('sms-package.user'),
+                'api_secret' => config('sms-package.pass'),
             ]
         ])->then(function ($response) {
             echo $response->getBody();

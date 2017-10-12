@@ -15,7 +15,9 @@
     "sms.ru",
     "sms ru",
     "sms Api",
-    "smsapi"
+    "smsapi",
+    "nexmo",
+    "clickatell"
   ],
   "license": "MIT",
   "authors": [
