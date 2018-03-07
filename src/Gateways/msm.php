@@ -39,14 +39,10 @@ class Msm
             $result['res'] = (int)$xml->STATUS["res"];
             $result['id'] = (int)$xml->STATUS["id"];
             $result['balance'] = (float)$xml->STATUS["balance"];
-            echo(json_encode($result));
+            return (json_encode($result));
         });
         $promise->wait();
     }
 
-//    public function balance()
-//    {
-//        return "currently gateway doesn't support balance option,however you can see balance as result when you send sms ";
-//    }
 
 }
