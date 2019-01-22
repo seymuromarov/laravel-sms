@@ -39,7 +39,7 @@
   "extra": {
     "laravel": {
       "providers": [
-        "Seymuromarov\\Sms\\SmsProviderServiceProvider"
+        "Seymuromarov\\Sms\\SmsServiceProvider"
       ],
       "aliases": {
         "Sms": "Seymuromarov\\Sms\\Facade\\Sms"
