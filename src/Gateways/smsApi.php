@@ -15,27 +15,6 @@ use Psr\Http\Message\ResponseInterface;
 
 class smsApi
 {
-//    rest example
-//    public function send_sms($mobile, $content)
-//    {
-//        if (is_array($mobile)) {
-//            $mobile = implode(',', $mobile);
-//        }
-//        $mobile = explode(",", $mobile);
-//
-//        $client = new \GuzzleHttp\Client();
-//        $promise = $client->requestAsync('POST', config('sms-package.ezTexting_url'), [
-//            'form_params' => [
-//                'User' => config('sms-package.user'),
-//                'Password' => config('sms-package.pass'),
-////                'PhoneNumbers' => $mobile,
-//                'Message' => $content,
-//            ]
-//        ])->then(function ($response) {
-////            echo $response->getBody();
-//        });
-//        $promise->wait();
-//    }
 
     public function send_sms($mobile, $content)
     {
@@ -47,7 +26,7 @@ class smsApi
 
         $request = new \GuzzleHttp\Psr7\Request('GET', $url);
         $promise = $client->sendAsync($request)->then(function ($response) {
-            echo $response->getBody();
+            return $response->getBody();
         });
         $promise->wait();
     }
@@ -58,7 +37,7 @@ class smsApi
         $client = new Client();
         $request = new \GuzzleHttp\Psr7\Request('GET', $url);
         $promise = $client->sendAsync($request)->then(function ($response) {
-            echo $response->getBody();
+            return $response->getBody();
         });
         $promise->wait();
     }

@@ -2,12 +2,17 @@
 
 namespace Seymuromarov\Sms;
 
+use App\User;
+use Illuminate\Support\Facades\Auth;
+use Seymuromarov\Randomcrap\Facades\Randomcrap;
 use Seymuromarov\Sms\Gateways\Clickatell;
 use Seymuromarov\Sms\Gateways\nexmoSms;
 use Seymuromarov\Sms\Gateways\smsApi;
 use Seymuromarov\Sms\Gateways\Msm;
 use Seymuromarov\Sms\Gateways\Clockwork;
 use Seymuromarov\Sms\Gateways\SmsRu;
+use Seymuromarov\Sms\Model\SmsLoginCode;
+use Seymuromarov\Sms\Model\SmsSent;
 
 class SmsGenerator
 {
@@ -21,7 +26,8 @@ class SmsGenerator
     public function send($mobile, $content)
     {
         if ($this->gateway) {
-            return $this->gateway->send_sms($mobile, $content);
+            $result = $this->gateway->send_sms($mobile, $content);
+            return $this->handle($mobile, $content, $result);
         } else {
             return "ERROR WRONG PROVIDER CURRENTLY WE SUPPORT -> clockwork,msm,smsRu,smsApi,nexmo,clickatell if u need other provider just ask it !";
         }
@@ -30,10 +36,75 @@ class SmsGenerator
     public function balance()
     {
         if (method_exists($this->gateway, 'balance')) {
-            echo $this->gateway->balance();
+            return $this->gateway->balance();
         } else {
-            echo "currently gateway doesn't support balance option,however you can see balance as result when you send sms ";
+            return "currently gateway doesn't support balance option,however you can see balance as result when you send sms ";
         }
+
+    }
+
+    public function login_code($mobile, $len = 6)
+    {
+        if (Auth::check()) {
+            Auth::logout();
+        }
+
+        $code = Randomcrap::int($len);
+
+        SmsLoginCode::create([
+            "number" => $mobile,
+            "code" => $code
+        ]);
+
+        $this->gateway->send_sms($mobile);
+
+    }
+
+    public function check_login($mobile, $code, $id = null)
+    {
+        if (Auth::check()) {
+            Auth::logout();
+        }
+
+        $check = SmsLoginCode::where('number', $mobile)
+            ->orderBy('id', 'desc')
+            ->select('code')
+            ->first();
+
+        if ($check->code == $code) {
+            if ($id == null) {
+                Auth::login(User::where(config('sms-package.db'), $mobile)->first());
+            } else {
+                Auth::loginUsingId($id);
+            }
+        }
+
+    }
+
+    public function handle($numbers, $message, $response = null)
+    {
+        if (config('sms-package.db')) {
+            foreach ($numbers as $number) {
+                SmsSent::create([
+                    "number" => $number,
+                    "message" => $message,
+                    "response" => $response
+                ]);
+            }
+        }
+        return $response;
+
+    }
+
+    public function handleLoginCode($number, $message, $response = null)
+    {
+        SmsLoginCode::create([
+            "number" => $number,
+            "message" => $message,
+            "response" => $response
+        ]);
+
+        return $response;
 
     }
 

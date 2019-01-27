@@ -23,7 +23,7 @@ class Clockwork
 
         $request = new \GuzzleHttp\Psr7\Request('GET', $url);
         $promise = $client->sendAsync($request)->then(function ($response) {
-            echo 'Result: ' . $response->getBody();
+            return 'Result: ' . $response->getBody();
         });
         $promise->wait();
     }
@@ -34,7 +34,7 @@ class Clockwork
         $client = new Client();
         $request = new \GuzzleHttp\Psr7\Request('GET', $url);
         $promise = $client->sendAsync($request)->then(function ($response) {
-            echo $response->getBody();
+            return $response->getBody();
         });
         $promise->wait();
     }

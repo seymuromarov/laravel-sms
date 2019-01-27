@@ -30,7 +30,7 @@ class nexmoSms
                 'api_secret' => config('sms-package.pass'),
             ]
         ])->then(function ($response) {
-            echo $response->getBody();
+            return $response->getBody();
         });
         $promise->wait();
 

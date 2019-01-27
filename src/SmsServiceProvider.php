@@ -13,7 +13,15 @@ class SmsServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        $this->publishes([
+            __DIR__.'/Config/sms.php' => config_path('sms.php'),
+        ], 'config');
+
+
+        $this->publishes([
+            __DIR__ . '/Migrations/' => database_path('migrations')
+        ], 'migrations');
+
     }
 
     /**
@@ -24,7 +32,7 @@ class SmsServiceProvider extends ServiceProvider
     public function register()
     {
         $this->mergeConfigFrom(
-            __DIR__ . '/Config/main.php', 'sms-package'
+            __DIR__ . '/Config/sms.php', 'sms-package'
         );
 
         $this->app->bind('seymuromarov-sms', function () {
