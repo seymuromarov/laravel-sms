@@ -1,6 +1,6 @@
 ## About Project
 
-Laravel api for sending sms from different providers  
+Laravel api for sending sms from different providers and auth via sms  
 Currently Supported `Sms.ru` , `Clockwork`  , `MSM`, `Smsapi`,`Nexmo`, `Clickatell`
 ## Requirements
 
