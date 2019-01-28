@@ -29,6 +29,6 @@ class CreateSmsSentTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sent_sms');
+        Schema::dropIfExists('sms_sent');
     }
 }

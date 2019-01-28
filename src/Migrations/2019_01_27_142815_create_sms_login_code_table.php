@@ -28,6 +28,6 @@ class CreateSmsLoginCodeTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sent_sms');
+        Schema::dropIfExists('sms_login_codes');
     }
 }
