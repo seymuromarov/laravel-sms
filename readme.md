@@ -49,7 +49,6 @@ Note for `Nexmo` :api_secret is SMS_PASS, api_key is SMS_USER
 
 use command (optional): 
 ``` 
-php artisan vendor:publish --tag=migrations
 php artisan migrate
 ```
 use this command if you want to save sent messages 
@@ -59,7 +58,7 @@ optional values to your `.env`
 ```
 SMS_DB=false
 ```
-SMS_DB - if u set true it will log all sent messages on db (you must migrate migrations),default is false
+SMS_DB - if you set true it will log all sent messages on db (you must migrate migrations),default is false
 
 For using Sms Sender use this:
 ```
@@ -109,7 +108,7 @@ For verification of code and logging in use this
     Sms::login_code(994513073940, "254129"); // it will find user and login with user whose number is 994513073940 and login via phone number
 
    // If u don't have phone table on users , we have solution for this too , just send id which u want to login for example:
-   Sms::login_code(994513073940, "254129",24); // it will wind user whose id is 24 and login via id 
+   Sms::login_code(994513073940, "254129",24); // it will find user whose id is 24 and login via id 
 
 ```
 
