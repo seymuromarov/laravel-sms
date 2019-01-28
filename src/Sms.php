@@ -4,7 +4,6 @@ namespace Seymuromarov\Sms;
 
 use App\User;
 use Illuminate\Support\Facades\Auth;
-use Seymuromarov\Randomcrap\Facades\Randomcrap;
 use Seymuromarov\Sms\Gateways\Clickatell;
 use Seymuromarov\Sms\Gateways\nexmoSms;
 use Seymuromarov\Sms\Gateways\smsApi;
@@ -43,20 +42,28 @@ class SmsGenerator
 
     }
 
-    public function login_code($mobile, $len = 6)
+    public function int_random($len = 6)
+    {
+        $word = array_merge(range(1, 9));
+        shuffle($word);
+        return (int)substr(implode($word), 0, $len);
+    }
+
+
+    public function login_code($mobile, $message = null, $len = 6)
     {
         if (Auth::check()) {
             Auth::logout();
         }
 
-        $code = Randomcrap::int($len);
-
+        $code = $this->int_random($len);
+        $message = $message . " " . $code;
         SmsLoginCode::create([
             "number" => $mobile,
             "code" => $code
         ]);
 
-        $this->gateway->send_sms($mobile);
+        $this->gateway->send_sms($mobile, $message);
 
     }
 
@@ -73,11 +80,13 @@ class SmsGenerator
 
         if ($check->code == $code) {
             if ($id == null) {
-                Auth::login(User::where(config('sms-package.db'), $mobile)->first());
+                Auth::login(User::where(config('sms-package.db_phone'), $mobile)->first());
             } else {
                 Auth::loginUsingId($id);
             }
+            return true;
         }
+        return false;
 
     }
 
